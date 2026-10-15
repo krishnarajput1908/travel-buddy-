@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log In - Travel Buddy</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Navbar -->
+  <nav class="navbar">
+    <div class="container navbar-container">
+      <a href="index.html" class="navbar-brand">
+        <div class="brand-icon">
+          <i class="fas fa-plane"></i>
+        </div>
+        <span>Travel Buddy</span>
+      </a>
+
+      <div class="navbar-nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="destinations.html" class="nav-link">Destinations</a>
+        <a href="plan-trip.html" class="nav-link">Plan Trip</a>
+      </div>
+
+      <div class="nav-actions" id="navbar-auth-actions"></div>
+      <button class="hamburger-btn" id="hamburger-toggle" aria-label="Toggle Navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Auth Container -->
+  <div class="auth-wrapper">
+    <div class="auth-card">
+      
+      <!-- Sidebar Showcase -->
+      <div class="auth-sidebar">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="Scenic Travel" class="auth-sidebar-bg">
+        
+        <div class="auth-sidebar-content">
+          <div style="display: flex; align-items: center; gap: 0.6rem;">
+            <div class="brand-icon" style="background: rgba(255,255,255,0.2); backdrop-filter: blur(10px);">
+              <i class="fas fa-compass"></i>
+            </div>
+            <span style="font-family: 'Outfit'; font-weight: 700; font-size: 1.25rem;">Travel Buddy</span>
+          </div>
+
+          <div>
+            <h2 style="font-size: 2.2rem; color: #ffffff; margin-bottom: 0.75rem;">Welcome Back, Explorer.</h2>
+            <p style="color: #cbd5e1; font-size: 1rem; line-height: 1.6;">
+              Sign in to manage your saved destinations, customized day-by-day itineraries, flight/hotel bookings, and live budget tracking.
+            </p>
+          </div>
+        </div>
+
+        <div style="position: relative; z-index: 2; font-size: 0.85rem; color: #94a3b8;">
+          “The world is a book and those who do not travel read only one page.” — Augustine
+        </div>
+      </div>
+
+      <!-- Login Form Side -->
+      <div class="auth-form-container">
+        <div style="margin-bottom: 1.75rem;">
+          <h2 style="font-size: 2rem; margin-bottom: 0.4rem;">Sign In</h2>
+          <p style="font-size: 0.95rem;">Enter your credentials or use the demo login to get started.</p>
+        </div>
+
+        <!-- Demo Account Helper Box -->
+        <div class="demo-account-box">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+            <span style="font-weight: 700; color: var(--primary-blue);"><i class="fas fa-key"></i> Quick Demo Account</span>
+            <button type="button" class="btn btn-primary btn-sm" style="padding: 0.25rem 0.6rem; font-size: 0.75rem;" onclick="TravelBuddyAuth.fillDemoCredentials()">
+              Auto-Fill Credentials
+            </button>
+          </div>
+          <div style="color: var(--text-muted); font-size: 0.8rem;">
+            Email: <code>alex@travelbuddy.com</code> | Password: <code>password123</code>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <form id="login-form">
+          <div class="form-group">
+            <label class="form-label" for="login-email">Email Address</label>
+            <input type="email" id="login-email" class="form-control" placeholder="name@example.com" required>
+            <div class="form-error-msg" id="email-error"></div>
+          </div>
+
+          <div class="form-group">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <label class="form-label" for="login-password">Password</label>
+              <a href="#" onclick="alert('For demo accounts, use password: password123'); return false;" style="font-size: 0.8rem; color: var(--primary-blue);">Forgot password?</a>
+            </div>
+            <input type="password" id="login-password" class="form-control" placeholder="••••••••" required>
+            <div class="form-error-msg" id="password-error"></div>
+          </div>
+
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
+            <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; cursor: pointer;">
+              <input type="checkbox" id="login-remember" style="accent-color: var(--primary-blue);">
+              <span>Remember me on this browser</span>
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block btn-lg" id="login-submit-btn">
+            <i class="fas fa-right-to-bracket"></i> Log In to Travel Buddy
+          </button>
+        </form>
+
+        <div style="text-align: center; margin-top: 1.75rem; font-size: 0.92rem; color: var(--text-muted);">
+          Don't have an account yet? 
+          <a href="register.html" style="color: var(--primary-blue); font-weight: 700;">Sign up free</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/script.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/ai-chat-widget.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // If already logged in, go to dashboard
+      TravelBuddyAuth.redirectIfLoggedIn();
+
+      // Pre-fill remembered email
+      const remembered = localStorage.getItem('tb_remember_email');
+      if (remembered) {
+        document.getElementById('login-email').value = remembered;
+        document.getElementById('login-remember').checked = true;
+      }
+
+      // Handle form submission (async)
+      const form = document.getElementById('login-form');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('login-email').value.trim();
+        const password = document.getElementById('login-password').value;
+        const remember = document.getElementById('login-remember').checked;
+
+        const result = await TravelBuddyAuth.login(email, password, remember);
+        if (result.success) {
+          TravelBuddy.showToast(`Welcome back, ${result.user.name}! 👋`, 'success');
+          const redirectUrl = sessionStorage.getItem('tb_redirect_after_login') || 'dashboard.html';
+          sessionStorage.removeItem('tb_redirect_after_login');
+          setTimeout(() => { window.location.href = redirectUrl; }, 600);
+        } else {
+          TravelBuddy.showToast(result.message, 'error');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

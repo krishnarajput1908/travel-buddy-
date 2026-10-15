@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Destination Details - Travel Buddy</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Navbar -->
+  <nav class="navbar">
+    <div class="container navbar-container">
+      <a href="index.html" class="navbar-brand">
+        <div class="brand-icon">
+          <i class="fas fa-plane"></i>
+        </div>
+        <span>Travel Buddy</span>
+      </a>
+
+      <div class="navbar-nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="destinations.html" class="nav-link active">Destinations</a>
+        <a href="plan-trip.html" class="nav-link">Plan Trip</a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="favourites.html" class="nav-link">Favourites</a>
+      </div>
+
+      <div class="nav-actions" id="navbar-auth-actions"></div>
+      <button class="hamburger-btn" id="hamburger-toggle" aria-label="Toggle Navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-drawer" id="mobile-nav-drawer">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="destinations.html" class="nav-link active">Destinations</a>
+    <a href="plan-trip.html" class="nav-link">Plan Trip</a>
+    <a href="dashboard.html" class="nav-link">Dashboard</a>
+    <a href="trips.html" class="nav-link">My Trips</a>
+    <a href="favourites.html" class="nav-link">Favourites</a>
+    <div id="mobile-auth-actions"></div>
+  </div>
+
+  <!-- Dynamic Destination Details Container -->
+  <main id="details-container">
+    <!-- Populated dynamically via TravelBuddyDestinations.renderDetailsPage() -->
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-bottom" style="border: none; padding-top: 0;">
+      <div>&copy; 2026 Travel Buddy. All Rights Reserved.</div>
+      <div style="display: flex; gap: 1.5rem;">
+        <a href="destinations.html">Explore More Places</a>
+        <a href="plan-trip.html">Plan a Trip</a>
+        <a href="favourites.html">Saved Places</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/script.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/ai-chat-widget.js"></script>
+  <script src="js/destinations.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      TravelBuddyDestinations.renderDetailsPage();
+    });
+  </script>
+</body>
+</html>

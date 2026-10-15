@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Bookings - Travel Buddy</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Navbar -->
+  <nav class="navbar">
+    <div class="container navbar-container">
+      <a href="index.html" class="navbar-brand">
+        <div class="brand-icon">
+          <i class="fas fa-plane"></i>
+        </div>
+        <span>Travel Buddy</span>
+      </a>
+
+      <div class="navbar-nav">
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="destinations.html" class="nav-link">Destinations</a>
+        <a href="plan-trip.html" class="nav-link">Plan Trip</a>
+        <a href="trips.html" class="nav-link">My Trips</a>
+        <a href="bookings.html" class="nav-link active">Bookings</a>
+        <a href="favourites.html" class="nav-link">Favourites</a>
+      </div>
+
+      <div class="nav-actions" id="navbar-auth-actions"></div>
+      <button class="hamburger-btn" id="hamburger-toggle" aria-label="Toggle Navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-drawer" id="mobile-nav-drawer">
+    <a href="dashboard.html" class="nav-link">Dashboard</a>
+    <a href="destinations.html" class="nav-link">Destinations</a>
+    <a href="plan-trip.html" class="nav-link">Plan Trip</a>
+    <a href="trips.html" class="nav-link">My Trips</a>
+    <a href="bookings.html" class="nav-link active">Bookings</a>
+    <a href="favourites.html" class="nav-link">Favourites</a>
+    <div id="mobile-auth-actions"></div>
+  </div>
+
+  <!-- Header Banner -->
+  <header style="background: linear-gradient(135deg, rgba(2, 132, 199, 0.08), rgba(249, 115, 22, 0.08)); padding: 3rem 0 2rem; border-bottom: 1px solid var(--border-light);">
+    <div class="container">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1.5rem;">
+        <div>
+          <span class="badge badge-blue" style="margin-bottom: 0.5rem;"><i class="fas fa-ticket"></i> Reservation Central</span>
+          <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">Booking Management</h1>
+          <p style="font-size: 1.05rem; color: var(--text-muted);">
+            View, track, and manage all your confirmed hotels, flights, trains, and booked activities.
+          </p>
+        </div>
+        <a href="plan-trip.html" class="btn btn-primary">
+          <i class="fas fa-plus"></i> New Reservation / Trip
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Bookings Container -->
+  <main class="container" style="padding-top: 2.5rem; padding-bottom: 5rem;">
+    
+    <!-- Category Tabs -->
+    <div class="bookings-tabs">
+      <div class="booking-tab active" data-type="all">All Bookings</div>
+      <div class="booking-tab" data-type="hotel"><i class="fas fa-hotel"></i> Hotels</div>
+      <div class="booking-tab" data-type="transport"><i class="fas fa-plane-departure"></i> Transportation</div>
+      <div class="booking-tab" data-type="activity"><i class="fas fa-person-hiking"></i> Activities</div>
+    </div>
+
+    <!-- Bookings Grid Container -->
+    <div class="bookings-grid" id="bookings-list-container">
+      <!-- Injected via bookings.js -->
+    </div>
+
+  </main>
+
+  <!-- Cancellation Confirmation Modal -->
+  <div class="modal-backdrop" id="cancel-booking-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 style="font-size: 1.25rem; color: var(--danger);"><i class="fas fa-triangle-exclamation"></i> Cancel Reservation</h3>
+        <button onclick="TravelBuddy.closeModal('cancel-booking-modal')" style="font-size: 1.25rem; color: var(--text-muted); cursor: pointer;">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <p id="cancel-modal-description" style="font-size: 0.95rem; color: var(--text-main); line-height: 1.5;">
+          Are you sure you want to cancel this booking? This action cannot be reversed.
+        </p>
+        <div style="margin-top: 1rem; padding: 0.75rem; background: var(--danger-bg); border-radius: var(--radius-md); font-size: 0.85rem; color: var(--danger);">
+          <i class="fas fa-circle-exclamation"></i> Full refund will be processed to the original payment method within 3-5 business days.
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline btn-sm" onclick="TravelBuddy.closeModal('cancel-booking-modal')">Keep Booking</button>
+        <button type="button" class="btn btn-accent btn-sm" style="background: var(--danger);" id="confirm-cancel-booking-btn">
+          Yes, Cancel Booking
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-bottom" style="border: none; padding-top: 0;">
+      <div>&copy; 2026 Travel Buddy. All Rights Reserved.</div>
+      <div style="display: flex; gap: 1.5rem;">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="trips.html">My Trips</a>
+        <a href="plan-trip.html">Plan a Trip</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/script.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/ai-chat-widget.js"></script>
+  <script src="js/bookings.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      TravelBuddyBookings.init();
+    });
+  </script>
+</body>
+</html>

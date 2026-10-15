@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Travel Buddy</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Navbar -->
+  <nav class="navbar">
+    <div class="container navbar-container">
+      <a href="index.html" class="navbar-brand">
+        <div class="brand-icon">
+          <i class="fas fa-plane"></i>
+        </div>
+        <span>Travel Buddy</span>
+      </a>
+
+      <div class="navbar-nav">
+        <a href="dashboard.html" class="nav-link active">Dashboard</a>
+        <a href="destinations.html" class="nav-link">Destinations</a>
+        <a href="plan-trip.html" class="nav-link">Plan Trip</a>
+        <a href="trips.html" class="nav-link">My Trips</a>
+        <a href="bookings.html" class="nav-link">Bookings</a>
+        <a href="favourites.html" class="nav-link">Favourites</a>
+      </div>
+
+      <div class="nav-actions" id="navbar-auth-actions"></div>
+      <button class="hamburger-btn" id="hamburger-toggle" aria-label="Toggle Navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-drawer" id="mobile-nav-drawer">
+    <a href="dashboard.html" class="nav-link active">Dashboard</a>
+    <a href="destinations.html" class="nav-link">Destinations</a>
+    <a href="plan-trip.html" class="nav-link">Plan Trip</a>
+    <a href="trips.html" class="nav-link">My Trips</a>
+    <a href="bookings.html" class="nav-link">Bookings</a>
+    <a href="favourites.html" class="nav-link">Favourites</a>
+    <a href="profile.html" class="nav-link">My Profile</a>
+    <a href="settings.html" class="nav-link">Settings</a>
+    <div id="mobile-auth-actions"></div>
+  </div>
+
+  <!-- Dashboard Main Container -->
+  <main class="container" style="padding-bottom: 5rem;">
+    
+    <!-- Greeting & Search Header -->
+    <div class="dashboard-header">
+      <div class="dashboard-greeting">
+        <h1 id="user-greeting">Good morning, Explorer 👋</h1>
+        <p style="font-size: 1.1rem;" id="user-greeting-sub">Ready for your next adventure?</p>
+      </div>
+
+      <!-- Quick Destination Search Widget -->
+      <div style="min-width: 320px; flex-grow: 0.3;">
+        <div class="search-input-group">
+          <i class="fas fa-magnifying-glass"></i>
+          <input type="text" id="dashboard-quick-search" placeholder="Search your next destination…" onkeydown="if(event.key === 'Enter') handleDashboardSearch()">
+        </div>
+      </div>
+    </div>
+
+    <!-- Travel Statistics Cards Grid -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon icon-blue">
+          <i class="fas fa-route"></i>
+        </div>
+        <div>
+          <div class="stat-value" id="stat-trips-planned">6</div>
+          <div class="stat-label">Trips Planned</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon icon-green">
+          <i class="fas fa-map-location-dot"></i>
+        </div>
+        <div>
+          <div class="stat-value" id="stat-destinations-visited">4</div>
+          <div class="stat-label">Destinations Visited</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon icon-coral">
+          <i class="fas fa-calendar-check"></i>
+        </div>
+        <div>
+          <div class="stat-value text-coral-gradient" id="stat-upcoming-trips">2</div>
+          <div class="stat-label">Upcoming Trips</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon icon-purple">
+          <i class="fas fa-heart"></i>
+        </div>
+        <div>
+          <div class="stat-value" id="stat-saved-destinations">8</div>
+          <div class="stat-label">Saved Destinations</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Action Shortcut Buttons Strip -->
+    <div class="quick-actions-grid">
+      <a href="plan-trip.html" class="quick-action-btn">
+        <div class="action-icon icon-coral">
+          <i class="fas fa-paper-plane"></i>
+        </div>
+        <div>
+          <div style="font-weight: 700; font-size: 1rem;">Plan a Trip</div>
+          <div style="font-size: 0.8rem; color: var(--text-muted);">Smart budgeting & schedule</div>
+        </div>
+      </a>
+
+      <a href="destinations.html" class="quick-action-btn">
+        <div class="action-icon icon-blue">
+          <i class="fas fa-earth-americas"></i>
+        </div>
+        <div>
+          <div style="font-weight: 700; font-size: 1rem;">Explore Places</div>
+          <div style="font-size: 0.8rem; color: var(--text-muted);">Discover top attractions</div>
+        </div>
+      </a>
+
+      <a href="trips.html" class="quick-action-btn">
+        <div class="action-icon icon-purple">
+          <i class="fas fa-suitcase"></i>
+        </div>
+        <div>
+          <div style="font-weight: 700; font-size: 1rem;">My Trips</div>
+          <div style="font-size: 0.8rem; color: var(--text-muted);">Upcoming & past routes</div>
+        </div>
+      </a>
+
+      <a href="bookings.html" class="quick-action-btn">
+        <div class="action-icon icon-green">
+          <i class="fas fa-ticket"></i>
+        </div>
+        <div>
+          <div style="font-weight: 700; font-size: 1rem;">Bookings</div>
+          <div style="font-size: 0.8rem; color: var(--text-muted);">Hotels, transit & passes</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Prominent Upcoming Trip Card -->
+    <div id="upcoming-trip-wrapper">
+      <!-- Injected dynamically via script -->
+    </div>
+
+    <!-- Recommended Destinations Section -->
+    <section style="margin-top: 3.5rem;">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem;">
+        <div>
+          <span class="badge badge-blue">Recommended For You</span>
+          <h2 style="font-size: 1.8rem; margin-top: 0.3rem;">Handpicked Destinations</h2>
+        </div>
+        <a href="destinations.html" class="btn btn-outline btn-sm">
+          Browse All <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <div class="destinations-grid" id="dashboard-destinations-grid">
+        <!-- Injected via destinations.js -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-bottom" style="border: none; padding-top: 0;">
+      <div>&copy; 2026 Travel Buddy. All Rights Reserved.</div>
+      <div style="display: flex; gap: 1.5rem;">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="profile.html">Profile</a>
+        <a href="settings.html">Settings</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/script.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/ai-chat-widget.js"></script>
+  <script src="js/destinations.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      // 1. Require Authentication
+      if (!TravelBuddyAuth.requireAuth()) return;
+
+      const user = TravelBuddyAuth.getCurrentUser();
+      
+      // 2. Set dynamic greeting based on time of day
+      const hour = new Date().getHours();
+      let greetingPrefix = 'Good morning';
+      if (hour >= 12 && hour < 17) greetingPrefix = 'Good afternoon';
+      if (hour >= 17) greetingPrefix = 'Good evening';
+
+      const greetingEl = document.getElementById('user-greeting');
+      if (greetingEl) {
+        greetingEl.innerHTML = `${greetingPrefix}, ${user.name.split(' ')[0]} 👋`;
+      }
+
+      // 3. Fetch stats from backend API + merge with localStorage
+      const token = localStorage.getItem('tb_jwt_token');
+      const headers = { 'Authorization': `Bearer ${token}` };
+
+      let trips = [];
+      let favCount = 0;
+
+      // Always read localStorage cache first
+      const localTrips = JSON.parse(localStorage.getItem(TravelBuddy.STORAGE_KEYS.TRIPS) || '[]');
+      const localFavs = JSON.parse(localStorage.getItem(TravelBuddy.STORAGE_KEYS.FAVOURITES) || '[]');
+
+      try {
+        const [tripsRes, favsRes] = await Promise.all([
+          fetch('http://localhost:5000/api/trips', { headers }),
+          fetch('http://localhost:5000/api/favourites', { headers })
+        ]);
+        if (tripsRes.ok) {
+          const td = await tripsRes.json();
+          let apiTrips = td.trips || td.data || [];
+          apiTrips.forEach(t => { if (t._id && !t.id) t.id = t._id; });
+
+          // Merge API + localStorage-only trips
+          const apiIds = new Set(apiTrips.map(t => (t._id || t.id)));
+          const localOnly = localTrips.filter(lt => !apiIds.has(lt._id || lt.id));
+          trips = [...apiTrips, ...localOnly];
+
+          // Update localStorage cache
+          localStorage.setItem(TravelBuddy.STORAGE_KEYS.TRIPS, JSON.stringify(trips));
+        } else {
+          trips = localTrips;
+        }
+        if (favsRes.ok) {
+          const fd = await favsRes.json();
+          const apiFavCount = (fd.favourites || fd.data || []).length;
+          // Use whichever is higher: API count or localStorage count
+          favCount = Math.max(apiFavCount, localFavs.length);
+        } else {
+          favCount = localFavs.length;
+        }
+      } catch(e) {
+        // Fallback: read from locally stored data
+        trips = localTrips;
+        favCount = localFavs.length;
+      }
+
+      const upcomingCount = trips.filter(t => t.status === 'Upcoming').length;
+      const completedCount = trips.filter(t => t.status === 'Completed').length;
+
+      document.getElementById('stat-trips-planned').innerText = trips.length || 0;
+      document.getElementById('stat-destinations-visited').innerText = completedCount || 0;
+      document.getElementById('stat-upcoming-trips').innerText = upcomingCount || 0;
+      document.getElementById('stat-saved-destinations').innerText = favCount || 0;
+
+      // 4. Render Next Upcoming Trip
+      const nextUpcoming = trips.find(t => t.status === 'Upcoming');
+      const upcomingWrapper = document.getElementById('upcoming-trip-wrapper');
+
+      if (nextUpcoming && upcomingWrapper) {
+        upcomingWrapper.innerHTML = `
+          <div class="upcoming-trip-card">
+            <div class="upcoming-trip-info">
+              <div>
+                <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.75rem;">
+                  <span class="badge badge-coral"><i class="fas fa-plane-departure"></i> Next Upcoming Trip</span>
+                  <span class="badge badge-success"><i class="fas fa-circle-check"></i> ${nextUpcoming.status}</span>
+                </div>
+                <h2 style="font-size: 2.2rem; color: #ffffff; margin-bottom: 0.5rem;">${nextUpcoming.destinationName || nextUpcoming.destination}</h2>
+                <p style="color: #cbd5e1; font-size: 1rem;">
+                  <i class="fas fa-calendar-alt"></i> ${nextUpcoming.startDate} to ${nextUpcoming.endDate} (${nextUpcoming.durationDays} Days)
+                </p>
+              </div>
+
+              <div class="upcoming-trip-chips">
+                <div class="trip-chip">
+                  <i class="fas fa-users"></i> ${nextUpcoming.travellers} Travelers (${nextUpcoming.travelType})
+                </div>
+                <div class="trip-chip">
+                  <i class="fas fa-wallet"></i> Est. Budget: ${TravelBuddy.formatCurrency(nextUpcoming.budget || nextUpcoming.estimatedBudget)}
+                </div>
+                <div class="trip-chip">
+                  <i class="fas fa-hotel"></i> ${nextUpcoming.accommodation} Stay
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <a href="itinerary.html?tripId=${nextUpcoming.id || nextUpcoming._id}" class="btn btn-primary">
+                  <i class="fas fa-list-check"></i> View Smart Itinerary
+                </a>
+                <a href="ai-chat.html" class="btn btn-outline" style="color: #fff; border-color: rgba(255,255,255,0.4);">
+                  <i class="fas fa-robot"></i> Chat with AI Buddy
+                </a>
+              </div>
+            </div>
+
+            <div class="upcoming-trip-img">
+              <img src="${nextUpcoming.image || 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=800&q=80'}" alt="${nextUpcoming.destinationName}">
+            </div>
+          </div>
+        `;
+      } else if (upcomingWrapper) {
+        upcomingWrapper.innerHTML = `
+          <div style="background: var(--bg-surface); padding: 3rem 2rem; border-radius: var(--radius-xl); border: 1px dashed var(--border-strong); text-align: center;">
+            <i class="fas fa-paper-plane" style="font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 1rem;"></i>
+            <h3>No upcoming trips scheduled yet</h3>
+            <p style="color: var(--text-muted); max-width: 450px; margin: 0.5rem auto 1.5rem;">Pick your dream destination and let Travel Buddy craft your budget and day-by-day plan in seconds.</p>
+            <div style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;">
+              <a href="plan-trip.html" class="btn btn-accent"><i class="fas fa-plus"></i> Plan a New Trip</a>
+              <a href="ai-chat.html" class="btn btn-outline"><i class="fas fa-robot"></i> Ask AI Buddy</a>
+            </div>
+          </div>
+        `;
+      }
+
+      // 5. Render Recommended Destinations (6 cards)
+      const recommendations = TravelBuddyDestinations.getAll().slice(0, 6);
+      TravelBuddyDestinations.renderCards(recommendations, 'dashboard-destinations-grid');
+    });
+
+    function handleDashboardSearch() {
+      const q = document.getElementById('dashboard-quick-search').value.trim();
+      if (q) {
+        window.location.href = `destinations.html?search=${encodeURIComponent(q)}`;
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account - Travel Buddy</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Navbar -->
+  <nav class="navbar">
+    <div class="container navbar-container">
+      <a href="index.html" class="navbar-brand">
+        <div class="brand-icon">
+          <i class="fas fa-plane"></i>
+        </div>
+        <span>Travel Buddy</span>
+      </a>
+
+      <div class="navbar-nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="destinations.html" class="nav-link">Destinations</a>
+        <a href="plan-trip.html" class="nav-link">Plan Trip</a>
+      </div>
+
+      <div class="nav-actions" id="navbar-auth-actions"></div>
+      <button class="hamburger-btn" id="hamburger-toggle" aria-label="Toggle Navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Auth Container -->
+  <div class="auth-wrapper">
+    <div class="auth-card">
+      
+      <!-- Sidebar Showcase -->
+      <div class="auth-sidebar">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Mountain Odyssey" class="auth-sidebar-bg">
+        
+        <div class="auth-sidebar-content">
+          <div style="display: flex; align-items: center; gap: 0.6rem;">
+            <div class="brand-icon" style="background: rgba(255,255,255,0.2); backdrop-filter: blur(10px);">
+              <i class="fas fa-mountain-sun"></i>
+            </div>
+            <span style="font-family: 'Outfit'; font-weight: 700; font-size: 1.25rem;">Travel Buddy</span>
+          </div>
+
+          <div>
+            <h2 style="font-size: 2.2rem; color: #ffffff; margin-bottom: 0.75rem;">Begin Your Adventure.</h2>
+            <p style="color: #cbd5e1; font-size: 1rem; line-height: 1.6;">
+              Join our community of over 35,000 travelers. Unlock intelligent budget forecasting, custom multi-day itineraries, and instant booking organization.
+            </p>
+          </div>
+        </div>
+
+        <div style="position: relative; z-index: 2; font-size: 0.85rem; color: #94a3b8;">
+          ✓ Free demo membership &nbsp;•&nbsp; ✓ Offline LocalStorage demo &nbsp;•&nbsp; ✓ Zero spam
+        </div>
+      </div>
+
+      <!-- Register Form Side -->
+      <div class="auth-form-container">
+        <div style="margin-bottom: 1.5rem;">
+          <h2 style="font-size: 2rem; margin-bottom: 0.4rem;">Create Account</h2>
+          <p style="font-size: 0.95rem;">It only takes 30 seconds to start planning smarter trips.</p>
+        </div>
+
+        <!-- Form -->
+        <form id="register-form">
+          <div class="form-group">
+            <label class="form-label" for="reg-name">Full Name</label>
+            <input type="text" id="reg-name" class="form-control" placeholder="e.g. Jordan Smith" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reg-email">Email Address</label>
+            <input type="email" id="reg-email" class="form-control" placeholder="name@example.com" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reg-password">Password</label>
+            <input type="password" id="reg-password" class="form-control" placeholder="At least 6 characters" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reg-confirm-password">Confirm Password</label>
+            <input type="password" id="reg-confirm-password" class="form-control" placeholder="Re-enter password" required>
+          </div>
+
+          <div style="margin-bottom: 1.5rem;">
+            <label style="display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.85rem; color: var(--text-muted); cursor: pointer;">
+              <input type="checkbox" id="reg-terms" checked required style="margin-top: 3px; accent-color: var(--primary-blue);">
+              <span>I agree to the Travel Buddy <a href="settings.html" style="color: var(--primary-blue);">Terms of Service</a> and <a href="settings.html" style="color: var(--primary-blue);">Privacy Policy</a>.</span>
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block btn-lg" id="reg-submit-btn">
+            <i class="fas fa-user-plus"></i> Create My Account
+          </button>
+        </form>
+
+        <div style="text-align: center; margin-top: 1.75rem; font-size: 0.92rem; color: var(--text-muted);">
+          Already have an account? 
+          <a href="login.html" style="color: var(--primary-blue); font-weight: 700;">Log in here</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/script.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/ai-chat-widget.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // If already logged in, go to dashboard
+      TravelBuddyAuth.redirectIfLoggedIn();
+
+      const form = document.getElementById('register-form');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const name = document.getElementById('reg-name').value;
+        const email = document.getElementById('reg-email').value;
+        const password = document.getElementById('reg-password').value;
+        const confirmPassword = document.getElementById('reg-confirm-password').value;
+
+        const result = await TravelBuddyAuth.register(name, email, password, confirmPassword);
+        if (result.success) {
+          TravelBuddy.showToast(`Account created! Welcome aboard, ${result.user.name} 🎉`, 'success', 2500);
+          setTimeout(() => { window.location.href = 'dashboard.html'; }, 800);
+        } else {
+          TravelBuddy.showToast(result.message, 'error');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plan a Trip & Budget Calculator - Travel Buddy</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Navbar -->
+  <nav class="navbar">
+    <div class="container navbar-container">
+      <a href="index.html" class="navbar-brand">
+        <div class="brand-icon">
+          <i class="fas fa-plane"></i>
+        </div>
+        <span>Travel Buddy</span>
+      </a>
+
+      <div class="navbar-nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="destinations.html" class="nav-link">Destinations</a>
+        <a href="plan-trip.html" class="nav-link active">Plan Trip</a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="trips.html" class="nav-link">My Trips</a>
+        <a href="bookings.html" class="nav-link">Bookings</a>
+      </div>
+
+      <div class="nav-actions" id="navbar-auth-actions"></div>
+      <button class="hamburger-btn" id="hamburger-toggle" aria-label="Toggle Navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-drawer" id="mobile-nav-drawer">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="destinations.html" class="nav-link">Destinations</a>
+    <a href="plan-trip.html" class="nav-link active">Plan Trip</a>
+    <a href="dashboard.html" class="nav-link">Dashboard</a>
+    <a href="trips.html" class="nav-link">My Trips</a>
+    <a href="bookings.html" class="nav-link">Bookings</a>
+    <div id="mobile-auth-actions"></div>
+  </div>
+
+  <!-- Header Banner -->
+  <header style="background: linear-gradient(135deg, rgba(249, 115, 22, 0.08), rgba(2, 132, 199, 0.08)); padding: 3rem 0 2rem; border-bottom: 1px solid var(--border-light);">
+    <div class="container">
+      <div style="max-width: 720px;">
+        <span class="badge badge-coral" style="margin-bottom: 0.5rem;"><i class="fas fa-calculator"></i> Smart Trip Architect</span>
+        <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">Plan Your Perfect Trip</h1>
+        <p style="font-size: 1.05rem; color: var(--text-muted);">
+          Configure your travel preferences and our dynamic engine will compute a realistic cost breakdown, check budget feasibility, and generate your day-by-day itinerary.
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Planner & Calculator -->
+  <main class="container" style="padding-bottom: 5rem;">
+    <div class="planner-layout">
+      
+      <!-- Left Column: Planning Form -->
+      <div class="planner-card">
+        <form id="plan-trip-form">
+          
+          <!-- Section 1: Route & Dates -->
+          <div style="margin-bottom: 2rem;">
+            <h3 style="font-size: 1.3rem; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.6rem;">
+              <span style="width: 28px; height: 28px; border-radius: 50%; background: var(--primary-blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.85rem;">1</span>
+              Where & When Are You Traveling?
+            </h3>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem;">
+              <div class="form-group" style="margin-bottom: 0;">
+                <label class="form-label" for="planner-destination">Target Destination</label>
+                <select id="planner-destination" class="form-control" required></select>
+              </div>
+
+              <div class="form-group" style="margin-bottom: 0;">
+                <label class="form-label" for="planner-origin">Starting City (Origin)</label>
+                <input type="text" id="planner-origin" class="form-control" placeholder="e.g. New Delhi" value="New Delhi" required>
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 1rem; align-items: flex-end;">
+              <div class="form-group" style="margin-bottom: 0;">
+                <label class="form-label" for="planner-start-date">Start Date</label>
+                <input type="date" id="planner-start-date" class="form-control" required>
+              </div>
+
+              <div class="form-group" style="margin-bottom: 0;">
+                <label class="form-label" for="planner-end-date">End Date</label>
+                <input type="date" id="planner-end-date" class="form-control" required>
+              </div>
+
+              <div style="padding-bottom: 0.4rem;">
+                <span class="badge badge-blue" id="planner-duration-badge" style="padding: 0.65rem 1rem;">5 Days</span>
+              </div>
+            </div>
+          </div>
+
+          <hr style="border: 0; border-top: 1px solid var(--border-light); margin-bottom: 2rem;">
+
+          <!-- Section 2: Travelers & Group Style -->
+          <div style="margin-bottom: 2rem;">
+            <h3 style="font-size: 1.3rem; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.6rem;">
+              <span style="width: 28px; height: 28px; border-radius: 50%; background: var(--primary-blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.85rem;">2</span>
+              Travelers & Party Composition
+            </h3>
+
+            <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 1.5rem; align-items: center;">
+              <div class="form-group" style="margin-bottom: 0;">
+                <label class="form-label" for="planner-travellers">Number of People</label>
+                <input type="number" id="planner-travellers" class="form-control" min="1" max="20" value="2" required>
+              </div>
+
+              <div>
+                <label class="form-label" style="margin-bottom: 0.5rem; display: block;">Travel Party Type</label>
+                <div class="options-grid">
+                  <div class="option-card travel-type-option" data-value="Solo">
+                    <i class="fas fa-person"></i>
+                    <span>Solo</span>
+                  </div>
+                  <div class="option-card travel-type-option selected" data-value="Couple">
+                    <i class="fas fa-user-group"></i>
+                    <span>Couple</span>
+                  </div>
+                  <div class="option-card travel-type-option" data-value="Family">
+                    <i class="fas fa-people-roof"></i>
+                    <span>Family</span>
+                  </div>
+                  <div class="option-card travel-type-option" data-value="Friends">
+                    <i class="fas fa-users-rays"></i>
+                    <span>Friends</span>
+                  </div>
+                </div>
+                <p id="travel-type-hint" style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.4rem; display:flex; align-items:center; gap: 0.3rem;">
+                  <i class="fas fa-circle-info" style="color: var(--primary-blue);"></i>
+                  <span id="travel-type-hint-text">Auto-selected based on traveler count. Change count to update.</span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <hr style="border: 0; border-top: 1px solid var(--border-light); margin-bottom: 2rem;">
+
+          <!-- Section 3: Transportation & Lodging -->
+          <div style="margin-bottom: 2rem;">
+            <h3 style="font-size: 1.3rem; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.6rem;">
+              <span style="width: 28px; height: 28px; border-radius: 50%; background: var(--primary-blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.85rem;">3</span>
+              Comfort & Logistics Preferences
+            </h3>
+
+            <!-- Transport Mode -->
+            <div style="margin-bottom: 1.25rem;">
+              <label class="form-label" style="margin-bottom: 0.5rem; display: block;">Preferred Transportation</label>
+              <div class="options-grid">
+                <div class="option-card transport-option selected" data-value="Flight">
+                  <i class="fas fa-plane-departure"></i>
+                  <span>Flight</span>
+                </div>
+                <div class="option-card transport-option" data-value="Train">
+                  <i class="fas fa-train"></i>
+                  <span>Train</span>
+                </div>
+                <div class="option-card transport-option" data-value="Bus">
+                  <i class="fas fa-bus"></i>
+                  <span>Bus</span>
+                </div>
+                <div class="option-card transport-option" data-value="Car">
+                  <i class="fas fa-car-side"></i>
+                  <span>Road / Car</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Accommodation Tier -->
+            <div style="margin-bottom: 1.25rem;">
+              <label class="form-label" style="margin-bottom: 0.5rem; display: block;">Accommodation Standard</label>
+              <div class="options-grid">
+                <div class="option-card accommodation-option" data-value="Budget">
+                  <i class="fas fa-campground"></i>
+                  <span>Budget (Hostel / BnB)</span>
+                </div>
+                <div class="option-card accommodation-option selected" data-value="Standard">
+                  <i class="fas fa-hotel"></i>
+                  <span>Standard (3-4 Star)</span>
+                </div>
+                <div class="option-card accommodation-option" data-value="Premium">
+                  <i class="fas fa-crown"></i>
+                  <span>Premium (5-Star / Resort)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Food Preference -->
+            <div>
+              <label class="form-label" style="margin-bottom: 0.5rem; display: block;">Dining Standard</label>
+              <div class="options-grid">
+                <div class="option-card food-option" data-value="Budget">
+                  <i class="fas fa-bowl-food"></i>
+                  <span>Casual / Street</span>
+                </div>
+                <div class="option-card food-option selected" data-value="Standard">
+                  <i class="fas fa-utensils"></i>
+                  <span>Standard Dining</span>
+                </div>
+                <div class="option-card food-option" data-value="Premium">
+                  <i class="fas fa-champagne-glasses"></i>
+                  <span>Fine Dining & Cafes</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr style="border: 0; border-top: 1px solid var(--border-light); margin-bottom: 2rem;">
+
+          <!-- Section 4: Activities Checklist -->
+          <div style="margin-bottom: 2rem;">
+            <h3 style="font-size: 1.3rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem;">
+              <span style="width: 28px; height: 28px; border-radius: 50%; background: var(--primary-blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.85rem;">4</span>
+              Planned Activities & Experiences
+            </h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+              <label style="display: flex; align-items: center; gap: 0.6rem; padding: 0.6rem; background: var(--bg-subtle); border-radius: var(--radius-md); cursor: pointer;">
+                <input type="checkbox" class="activity-checkbox" value="Sightseeing & Heritage" checked style="accent-color: var(--primary-blue);">
+                <span style="font-size: 0.9rem;">Sightseeing & Heritage</span>
+              </label>
+
+              <label style="display: flex; align-items: center; gap: 0.6rem; padding: 0.6rem; background: var(--bg-subtle); border-radius: var(--radius-md); cursor: pointer;">
+                <input type="checkbox" class="activity-checkbox" value="Outdoor Adventure Sports" checked style="accent-color: var(--primary-blue);">
+                <span style="font-size: 0.9rem;">Outdoor Adventure Sports</span>
+              </label>
+
+              <label style="display: flex; align-items: center; gap: 0.6rem; padding: 0.6rem; background: var(--bg-subtle); border-radius: var(--radius-md); cursor: pointer;">
+                <input type="checkbox" class="activity-checkbox" value="Local Culinary Tasting" checked style="accent-color: var(--primary-blue);">
+                <span style="font-size: 0.9rem;">Local Culinary Tasting</span>
+              </label>
+
+              <label style="display: flex; align-items: center; gap: 0.6rem; padding: 0.6rem; background: var(--bg-subtle); border-radius: var(--radius-md); cursor: pointer;">
+                <input type="checkbox" class="activity-checkbox" value="Bazaars & Souvenir Shopping" style="accent-color: var(--primary-blue);">
+                <span style="font-size: 0.9rem;">Bazaars & Souvenir Shopping</span>
+              </label>
+            </div>
+          </div>
+
+          <hr style="border: 0; border-top: 1px solid var(--border-light); margin-bottom: 2rem;">
+
+          <!-- Section 5: Target Budget -->
+          <div style="margin-bottom: 2rem;">
+            <h3 style="font-size: 1.3rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem;">
+              <span style="width: 28px; height: 28px; border-radius: 50%; background: var(--primary-blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.85rem;">5</span>
+              Target Trip Budget
+            </h3>
+            <div class="form-group">
+              <label class="form-label" for="planner-user-budget">Your Target Budget (in ₹)</label>
+              <input type="number" id="planner-user-budget" class="form-control" value="50000" step="1000" placeholder="e.g. 50000">
+              <span style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem;">
+                Adjust this number to compare against the real-time system cost estimation.
+              </span>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-accent btn-block btn-lg" id="submit-plan-btn">
+            <i class="fas fa-wand-magic-sparkles"></i> Generate Smart Itinerary & Save Trip
+          </button>
+        </form>
+      </div>
+
+      <!-- Right Column: Live Dynamic Budget Calculator Card -->
+      <div>
+        <div class="budget-calculator-card">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+            <h3 style="font-size: 1.3rem;">Estimated Trip Budget</h3>
+            <span class="badge badge-success" id="budget-status-pill">Within Budget</span>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-muted);" id="budget-status-desc">
+            Estimated cost matches comfortably with your spending limit.
+          </p>
+
+          <!-- Visual Progress Bar -->
+          <div class="budget-progress-container">
+            <div class="progress-bar-track">
+              <div class="progress-bar-fill" id="budget-progress-fill" style="width: 82%;"></div>
+            </div>
+          </div>
+
+          <!-- Breakdown List -->
+          <div class="budget-breakdown-list">
+            <div class="budget-item">
+              <span><i class="fas fa-plane text-gradient"></i> Transportation</span>
+              <span style="font-weight: 700;" id="calc-transport">₹15,400</span>
+            </div>
+
+            <div class="budget-item">
+              <span><i class="fas fa-hotel text-gradient"></i> Accommodation</span>
+              <span style="font-weight: 700;" id="calc-accommodation">₹18,500</span>
+            </div>
+
+            <div class="budget-item">
+              <span><i class="fas fa-utensils text-gradient"></i> Food & Dining</span>
+              <span style="font-weight: 700;" id="calc-food">₹9,000</span>
+            </div>
+
+            <div class="budget-item">
+              <span><i class="fas fa-person-hiking text-coral-gradient"></i> Activities & Entry</span>
+              <span style="font-weight: 700;" id="calc-activities">₹7,200</span>
+            </div>
+
+            <div class="budget-item">
+              <span><i class="fas fa-shield-halved text-gradient"></i> Misc & Buffer (8%)</span>
+              <span style="font-weight: 700;" id="calc-misc">₹3,800</span>
+            </div>
+          </div>
+
+          <!-- Total Cost Box -->
+          <div class="budget-total-box">
+            <div>
+              <div style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">Total Estimated Cost</div>
+              <div style="font-size: 2rem; font-weight: 800; font-family: 'Outfit'; color: var(--primary-blue);" id="calc-total">
+                ₹53,900
+              </div>
+            </div>
+            <button type="button" class="btn btn-outline btn-sm" onclick="TravelBuddyPlanner.recalculateBudget()" title="Recalculate">
+              <i class="fas fa-rotate"></i> Recalculate
+            </button>
+          </div>
+
+          <div style="margin-top: 1.5rem; padding: 0.9rem; background: var(--bg-subtle); border-radius: var(--radius-md); font-size: 0.82rem; color: var(--text-muted); line-height: 1.5;">
+            <i class="fas fa-circle-info" style="color: var(--primary-blue);"></i> 
+            Estimates are calculated using current hotel tariffs, fuel/flight benchmarks, and verified local attraction ticket pricing.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-bottom" style="border: none; padding-top: 0;">
+      <div>&copy; 2026 Travel Buddy. All Rights Reserved.</div>
+      <div style="display: flex; gap: 1.5rem;">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="destinations.html">Destinations</a>
+        <a href="itinerary.html">Itinerary</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/script.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/ai-chat-widget.js"></script>
+  <script src="js/destinations.js"></script>
+  <script src="js/itinerary.js"></script>
+  <script src="js/planner.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      TravelBuddyPlanner.init();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Buddy - Your Journey. Your Plan. Your Travel Buddy.</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <nav class="navbar">
+    <div class="container navbar-container">
+      <a href="index.html" class="navbar-brand">
+        <div class="brand-icon">
+          <i class="fas fa-plane"></i>
+        </div>
+        <span>Travel Buddy</span>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <div class="navbar-nav">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="destinations.html" class="nav-link">Destinations</a>
+        <a href="plan-trip.html" class="nav-link">Plan Trip</a>
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#assistance" class="nav-link">Assistance</a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+      </div>
+
+      <!-- Auth / User Actions -->
+      <div class="nav-actions" id="navbar-auth-actions">
+        <!-- Injected dynamically by script.js -->
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button class="hamburger-btn" id="hamburger-toggle" aria-label="Open Navigation Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-nav-drawer" id="mobile-nav-drawer">
+    <a href="index.html" class="nav-link active">Home</a>
+    <a href="destinations.html" class="nav-link">Destinations</a>
+    <a href="plan-trip.html" class="nav-link">Plan Trip</a>
+    <a href="dashboard.html" class="nav-link">Dashboard</a>
+    <a href="trips.html" class="nav-link">My Trips</a>
+    <a href="bookings.html" class="nav-link">Bookings</a>
+    <a href="favourites.html" class="nav-link">Favourites</a>
+    <div id="mobile-auth-actions"></div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <i class="fas fa-compass"></i> Next-Gen Smart Travel Planner
+          </div>
+          <h1 class="hero-title">
+            Your Journey.<br>
+            Your Plan.<br>
+            <span class="text-gradient">Your Travel Buddy.</span>
+          </h1>
+          <p class="hero-subtitle">
+            Discover destinations, build personalized day-by-day itineraries, estimate your complete trip budget, and manage all your travel bookings — all in one place.
+          </p>
+          <div class="hero-cta-group">
+            <a href="plan-trip.html" class="btn btn-accent btn-lg">
+              <i class="fas fa-paper-plane"></i> Plan My Trip
+            </a>
+            <a href="destinations.html" class="btn btn-outline btn-lg">
+              <i class="fas fa-magnifying-glass"></i> Explore Destinations
+            </a>
+          </div>
+
+          <!-- Quick Search Bar -->
+          <div class="search-widget-bar">
+            <div class="search-field">
+              <i class="fas fa-location-dot"></i>
+              <input type="text" id="hero-search-input" placeholder="Where do you want to go?" value="Manali">
+            </div>
+            <div class="search-field">
+              <i class="fas fa-compass"></i>
+              <select id="hero-type-select">
+                <option value="all">Any Travel Type</option>
+                <option value="Adventure">Adventure</option>
+                <option value="Beach">Beach & Sun</option>
+                <option value="Heritage">Heritage & Culture</option>
+                <option value="Romantic">Romantic Getaway</option>
+                <option value="Nature">Nature & Mountain</option>
+              </select>
+            </div>
+            <div class="search-field">
+              <i class="fas fa-wallet"></i>
+              <select id="hero-budget-select">
+                <option value="all">Any Budget Tier</option>
+                <option value="Budget">Budget</option>
+                <option value="Moderate">Moderate</option>
+                <option value="Luxury">Luxury</option>
+              </select>
+            </div>
+            <button class="btn btn-primary" onclick="handleHeroSearch()">
+              <i class="fas fa-search"></i> Search
+            </button>
+          </div>
+        </div>
+
+        <!-- Hero Visual Showcase -->
+        <div class="hero-visual">
+          <div class="hero-card-main">
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80" alt="Exotic Travel Destination">
+          </div>
+          
+          <!-- Floating Stats Pill -->
+          <div class="hero-floating-stat">
+            <div class="stat-icon icon-blue">
+              <i class="fas fa-shield-halved"></i>
+            </div>
+            <div>
+              <div style="font-weight: 800; font-size: 1.1rem; color: var(--text-main);">100% Verified</div>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">Smart curated itineraries</div>
+            </div>
+          </div>
+
+          <!-- Floating Badge -->
+          <div class="hero-floating-badge">
+            <i class="fas fa-star" style="color: var(--accent-amber); font-size: 1.25rem;"></i>
+            <div>
+              <div style="font-weight: 800; font-size: 0.95rem; color: var(--text-main);">4.9 / 5.0 Rating</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">From 24,000+ Happy Travelers</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Statistics Strip -->
+  <section style="background: var(--bg-surface); border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light); padding: 2.5rem 0;">
+    <div class="container">
+      <div class="stats-grid" style="margin-bottom: 0;">
+        <div class="stat-card">
+          <div class="stat-icon icon-blue">
+            <i class="fas fa-map-marked-alt"></i>
+          </div>
+          <div>
+            <div class="stat-value text-gradient">150+</div>
+            <div class="stat-label">Destinations Cataloged</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon icon-coral">
+            <i class="fas fa-route"></i>
+          </div>
+          <div>
+            <div class="stat-value text-coral-gradient">42,000+</div>
+            <div class="stat-label">Smart Trips Generated</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon icon-green">
+            <i class="fas fa-coins"></i>
+          </div>
+          <div>
+            <div class="stat-value">98.4%</div>
+            <div class="stat-label">Budget Precision Rate</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon icon-purple">
+            <i class="fas fa-users"></i>
+          </div>
+          <div>
+            <div class="stat-value">35,000+</div>
+            <div class="stat-label">Active Globetrotters</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge badge-blue">Built for Modern Travelers</span>
+        <h2 class="section-title">Everything You Need for Effortless Journeys</h2>
+        <p>No more messy spreadsheets or dozen open tabs. Travel Buddy consolidates your entire travel lifecycle into an elegant, unified platform.</p>
+      </div>
+
+      <div class="features-grid">
+        <!-- Feature 1 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper icon-blue">
+            <i class="fas fa-route"></i>
+          </div>
+          <h3>Smart Trip Planning</h3>
+          <p>Configure your destination, starting city, travel dates, passenger count, preferred transit, and lodging tier with seamless precision.</p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper icon-coral">
+            <i class="fas fa-earth-americas"></i>
+          </div>
+          <h3>Destination Discovery</h3>
+          <p>Explore world-class destinations featuring verified reviews, curated attractions, local transportation guides, and seasonal weather feeds.</p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper icon-green">
+            <i class="fas fa-calculator"></i>
+          </div>
+          <h3>Dynamic Budget Estimation</h3>
+          <p>Accurately estimate expenses categorized into transit, lodging, dining, activities, and emergency buffer before spending a dime.</p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper icon-purple">
+            <i class="fas fa-calendar-check"></i>
+          </div>
+          <h3>Smart Day-by-Day Itinerary</h3>
+          <p>Automatically generate time-stamped day-by-day schedules with full freedom to add custom stops, edit timings, and track completions.</p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper icon-blue">
+            <i class="fas fa-ticket"></i>
+          </div>
+          <h3>Booking Management</h3>
+          <p>Keep your hotel stays, flight/train tickets, and adventure reservations organized with real-time status alerts and one-tap cancellations.</p>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper icon-coral">
+            <i class="fas fa-hand-holding-heart"></i>
+          </div>
+          <h3>Travel Assistance & Safety</h3>
+          <p>Access ready-to-use packing checklists, document safeguards, emergency helplines, local etiquette guides, and seasonal advisories.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Destinations Showcase Section -->
+  <section class="section" style="background: var(--bg-subtle);">
+    <div class="container">
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <span class="badge badge-coral">Top Picks</span>
+          <h2 style="font-size: 2.2rem; margin-top: 0.4rem;">Trending Destinations</h2>
+          <p>Curated hotspots travelers are loving this season.</p>
+        </div>
+        <a href="destinations.html" class="btn btn-outline">
+          View All Destinations <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <div class="destinations-grid" id="home-destinations-grid">
+        <!-- Rendered via destinations.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Travel Assistance Section -->
+  <section class="section" id="assistance">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge badge-purple">Traveler Support & Readiness</span>
+        <h2 class="section-title">Essential Travel Assistance</h2>
+        <p>Smart tools, checklists, and safety advisories to guarantee worry-free journeys wherever you go.</p>
+      </div>
+
+      <div class="features-grid">
+        <!-- Assistance Card 1 -->
+        <div class="feature-card" style="border-top: 4px solid var(--primary-blue);">
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+            <i class="fas fa-suitcase-rolling" style="font-size: 1.5rem; color: var(--primary-blue);"></i>
+            <h4 style="font-size: 1.2rem;">Smart Packing Checklist</h4>
+          </div>
+          <p style="font-size: 0.9rem;">Never leave essentials behind. Pack weather-appropriate gear, universal adapters, emergency first aid, and power banks.</p>
+          <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.88rem; color: var(--text-main); margin-top: 0.5rem;">
+            <div><i class="fas fa-check text-gradient"></i> All-weather clothing & quick-dry layers</div>
+            <div><i class="fas fa-check text-gradient"></i> Travel medical kit & personal prescriptions</div>
+            <div><i class="fas fa-check text-gradient"></i> Universal power adapter (Type C/G)</div>
+          </div>
+        </div>
+
+        <!-- Assistance Card 2 -->
+        <div class="feature-card" style="border-top: 4px solid var(--accent-coral);">
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+            <i class="fas fa-passport" style="font-size: 1.5rem; color: var(--accent-coral);"></i>
+            <h4 style="font-size: 1.2rem;">Important Documents Vault</h4>
+          </div>
+          <p style="font-size: 0.9rem;">Ensure physical and digital duplicates are secured before departure to prevent border complications.</p>
+          <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.88rem; color: var(--text-main); margin-top: 0.5rem;">
+            <div><i class="fas fa-check text-coral-gradient"></i> Passport / National ID with 6 months validity</div>
+            <div><i class="fas fa-check text-coral-gradient"></i> Digital travel insurance policy certificate</div>
+            <div><i class="fas fa-check text-coral-gradient"></i> Printed hotel booking & return transit vouchers</div>
+          </div>
+        </div>
+
+        <!-- Assistance Card 3 -->
+        <div class="feature-card" style="border-top: 4px solid var(--success);">
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+            <i class="fas fa-shield-virus" style="font-size: 1.5rem; color: var(--success);"></i>
+            <h4 style="font-size: 1.2rem;">Safety & Emergency Info</h4>
+          </div>
+          <p style="font-size: 0.9rem;">Verified domestic and international tourist helplines and emergency protocols accessible 24/7.</p>
+          <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.88rem; color: var(--text-main); margin-top: 0.5rem;">
+            <div><i class="fas fa-phone" style="color: var(--success);"></i> Tourist Helpline (India): <strong>1363</strong></div>
+            <div><i class="fas fa-phone" style="color: var(--success);"></i> Emergency SOS Services: <strong>112</strong></div>
+            <div><i class="fas fa-hospital" style="color: var(--success);"></i> 24/7 Medical & Ambulance Dispatch: <strong>108</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action Banner -->
+  <section class="container" style="margin-bottom: 5rem;">
+    <div style="background: linear-gradient(135deg, var(--primary-navy), #1e293b); border-radius: var(--radius-xl); padding: 4rem 2rem; text-align: center; color: #ffffff; box-shadow: var(--shadow-xl); position: relative; overflow: hidden;">
+      <div style="position: relative; z-index: 2; max-width: 680px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 1.25rem;">
+        <span class="badge badge-coral">Start Your Journey Today</span>
+        <h2 style="font-size: 2.8rem; color: #ffffff;">Ready for your next unforgettable adventure?</h2>
+        <p style="color: #cbd5e1; font-size: 1.1rem;">Join thousands of smart globetrotters who plan their dream getaways in minutes with Travel Buddy.</p>
+        <div style="display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap; justify-content: center;">
+          <a href="plan-trip.html" class="btn btn-accent btn-lg">
+            <i class="fas fa-paper-plane"></i> Plan My Trip Now
+          </a>
+          <a href="register.html" class="btn btn-outline btn-lg" style="color: #fff; border-color: rgba(255,255,255,0.3);">
+            Create Free Account
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Master Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="navbar-brand">
+            <div class="brand-icon">
+              <i class="fas fa-plane"></i>
+            </div>
+            <span>Travel Buddy</span>
+          </a>
+          <p class="footer-tagline">
+            Making every journey easier, smarter, and more memorable. Discover places, craft itineraries, and track budgets seamlessly.
+          </p>
+          <div class="social-links">
+            <a href="https://instagram.com" target="_blank" class="social-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://facebook.com" target="_blank" class="social-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com" target="_blank" class="social-btn" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+            <a href="https://linkedin.com" target="_blank" class="social-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Explore</h4>
+          <div class="footer-links-list">
+            <a href="destinations.html">All Destinations</a>
+            <a href="destinations.html?type=Adventure">Adventure Spots</a>
+            <a href="destinations.html?type=Beach">Beach Getaways</a>
+            <a href="destinations.html?type=Heritage">Heritage & Culture</a>
+            <a href="destinations.html?budget=Budget">Budget Trips</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Platform</h4>
+          <div class="footer-links-list">
+            <a href="plan-trip.html">Plan a Trip</a>
+            <a href="dashboard.html">Travel Dashboard</a>
+            <a href="trips.html">My Trips</a>
+            <a href="bookings.html">Manage Bookings</a>
+            <a href="favourites.html">Saved Places</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Company & Legal</h4>
+          <div class="footer-links-list">
+            <a href="#features">About Us</a>
+            <a href="#assistance">Safety & Assistance</a>
+            <a href="settings.html">Privacy Policy</a>
+            <a href="settings.html">Terms of Service</a>
+            <a href="profile.html">Traveler Profile</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 Travel Buddy. All Rights Reserved. Designed with <i class="fas fa-heart" style="color: #ef4444;"></i> for adventurous minds.
+        </div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="settings.html">Privacy Policy</a>
+          <a href="settings.html">Terms</a>
+          <a href="settings.html">Cookies</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/script.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/ai-chat-widget.js"></script>
+  <script src="js/destinations.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Render 4 trending destinations on homepage
+      const sample = TravelBuddyDestinations.getAll().slice(0, 4);
+      TravelBuddyDestinations.renderCards(sample, 'home-destinations-grid');
+    });
+
+    function handleHeroSearch() {
+      const q = document.getElementById('hero-search-input').value.trim();
+      const type = document.getElementById('hero-type-select').value;
+      const budget = document.getElementById('hero-budget-select').value;
+      
+      const params = new URLSearchParams();
+      if (q) params.set('search', q);
+      if (type !== 'all') params.set('type', type);
+      if (budget !== 'all') params.set('budget', budget);
+      
+      window.location.href = `destinations.html?${params.toString()}`;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore Destinations - Travel Buddy</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Navbar -->
+  <nav class="navbar">
+    <div class="container navbar-container">
+      <a href="index.html" class="navbar-brand">
+        <div class="brand-icon">
+          <i class="fas fa-plane"></i>
+        </div>
+        <span>Travel Buddy</span>
+      </a>
+
+      <div class="navbar-nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="destinations.html" class="nav-link active">Destinations</a>
+        <a href="plan-trip.html" class="nav-link">Plan Trip</a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="trips.html" class="nav-link">My Trips</a>
+        <a href="favourites.html" class="nav-link">Favourites</a>
+      </div>
+
+      <div class="nav-actions" id="navbar-auth-actions"></div>
+      <button class="hamburger-btn" id="hamburger-toggle" aria-label="Toggle Navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-drawer" id="mobile-nav-drawer">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="destinations.html" class="nav-link active">Destinations</a>
+    <a href="plan-trip.html" class="nav-link">Plan Trip</a>
+    <a href="dashboard.html" class="nav-link">Dashboard</a>
+    <a href="trips.html" class="nav-link">My Trips</a>
+    <a href="bookings.html" class="nav-link">Bookings</a>
+    <a href="favourites.html" class="nav-link">Favourites</a>
+    <div id="mobile-auth-actions"></div>
+  </div>
+
+  <!-- Explorer Header -->
+  <header style="background: linear-gradient(135deg, rgba(2, 132, 199, 0.08), rgba(237, 233, 254, 0.4)); padding: 3.5rem 0 2.5rem; border-bottom: 1px solid var(--border-light);">
+    <div class="container text-center" style="max-width: 760px; margin: 0 auto; text-align: center;">
+      <span class="badge badge-blue" style="margin-bottom: 0.75rem;"><i class="fas fa-compass"></i> Curated Catalog</span>
+      <h1 style="font-size: 2.8rem; margin-bottom: 0.75rem;">Discover Extraordinary Places</h1>
+      <p style="font-size: 1.1rem; color: var(--text-muted);">
+        Explore realistic travel hotspots with verified local advice, attraction highlights, travel cost forecasts, and instant trip planning.
+      </p>
+    </div>
+  </header>
+
+  <!-- Main Explorer Content -->
+  <main class="container" style="padding-top: 2.5rem; padding-bottom: 5rem;">
+    
+    <!-- Multi-Filter & Search Bar Container -->
+    <div class="filter-container">
+      
+      <!-- Search Input -->
+      <div class="filter-main-search">
+        <div class="search-input-group">
+          <i class="fas fa-magnifying-glass"></i>
+          <input type="text" id="search-destination" placeholder="Where do you want to go? (e.g. Manali, Goa, Paris, Dubai…)">
+        </div>
+        <button class="btn btn-primary" onclick="applyFilters()">
+          <i class="fas fa-filter"></i> Apply Filters
+        </button>
+      </div>
+
+      <!-- Filter Controls Row -->
+      <div class="filter-pills-row">
+        <span class="filter-label"><i class="fas fa-sliders"></i> Filters:</span>
+        
+        <!-- Country Select -->
+        <select id="filter-country" class="filter-select" onchange="applyFilters()">
+          <option value="all">All Countries</option>
+          <option value="India">India</option>
+          <option value="France">France</option>
+          <option value="United Arab Emirates">United Arab Emirates</option>
+          <option value="Indonesia">Indonesia</option>
+          <option value="Switzerland">Switzerland</option>
+        </select>
+
+        <!-- Budget Level -->
+        <select id="filter-budget" class="filter-select" onchange="applyFilters()">
+          <option value="all">Any Budget Tier</option>
+          <option value="Budget">Budget Tier</option>
+          <option value="Moderate">Moderate Tier</option>
+          <option value="Luxury">Luxury Tier</option>
+        </select>
+
+        <!-- Travel Type -->
+        <select id="filter-type" class="filter-select" onchange="applyFilters()">
+          <option value="all">Any Travel Type</option>
+          <option value="Adventure">Adventure</option>
+          <option value="Beach">Beach</option>
+          <option value="Heritage">Heritage</option>
+          <option value="Nature">Nature & Mountain</option>
+          <option value="Romantic">Romantic</option>
+          <option value="City">City & Culture</option>
+        </select>
+
+        <!-- Rating Filter -->
+        <select id="filter-rating" class="filter-select" onchange="applyFilters()">
+          <option value="all">Any Rating</option>
+          <option value="4.8">4.8 & Above</option>
+          <option value="4.5">4.5 & Above</option>
+        </select>
+
+        <!-- Sort Filter -->
+        <select id="filter-sort" class="filter-select" style="margin-left: auto;" onchange="applyFilters()">
+          <option value="popular">Sort: Most Popular</option>
+          <option value="price-low">Price: Low to High</option>
+          <option value="price-high">Price: High to Low</option>
+          <option value="rating">Top Rated</option>
+        </select>
+      </div>
+
+      <!-- Quick Category Chips -->
+      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; padding-top: 0.5rem; border-top: 1px solid var(--border-light);">
+        <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted); align-self: center;">Quick tags:</span>
+        <button class="filter-chip active" onclick="setQuickType('all', this)">All Places</button>
+        <button class="filter-chip" onclick="setQuickType('Adventure', this)">🏔️ Adventure</button>
+        <button class="filter-chip" onclick="setQuickType('Beach', this)">🏖️ Beach & Island</button>
+        <button class="filter-chip" onclick="setQuickType('Heritage', this)">🏰 Royal Heritage</button>
+        <button class="filter-chip" onclick="setQuickType('Romantic', this)">❤️ Romantic</button>
+        <button class="filter-chip" onclick="setQuickType('City', this)">🌆 Megacities</button>
+      </div>
+    </div>
+
+    <!-- Active Filter Counter Header -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+      <h3 style="font-size: 1.3rem;" id="results-count-text">Showing All Destinations</h3>
+      <button class="btn btn-ghost btn-sm" onclick="TravelBuddyDestinations.resetFilters()">
+        <i class="fas fa-arrow-rotate-left"></i> Reset Filters
+      </button>
+    </div>
+
+    <!-- Destinations Grid -->
+    <div class="destinations-grid" id="destinations-grid-container">
+      <!-- Injected dynamically via destinations.js -->
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-bottom" style="border: none; padding-top: 0;">
+      <div>&copy; 2026 Travel Buddy. All Rights Reserved.</div>
+      <div style="display: flex; gap: 1.5rem;">
+        <a href="index.html">Home</a>
+        <a href="destinations.html">Destinations</a>
+        <a href="plan-trip.html">Plan Trip</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/script.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/ai-chat-widget.js"></script>
+  <script src="js/destinations.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Check for URL params
+      const params = new URLSearchParams(window.location.search);
+      const searchParam = params.get('search');
+      const countryParam = params.get('country');
+      const budgetParam = params.get('budget');
+      const typeParam = params.get('type');
+
+      if (searchParam) document.getElementById('search-destination').value = searchParam;
+      if (countryParam) document.getElementById('filter-country').value = countryParam;
+      if (budgetParam) document.getElementById('filter-budget').value = budgetParam;
+      if (typeParam) document.getElementById('filter-type').value = typeParam;
+
+      // Realtime typing search listener
+      document.getElementById('search-destination').addEventListener('input', () => {
+        applyFilters();
+      });
+
+      applyFilters();
+    });
+
+    function applyFilters() {
+      const q = document.getElementById('search-destination').value;
+      const country = document.getElementById('filter-country').value;
+      const budget = document.getElementById('filter-budget').value;
+      const type = document.getElementById('filter-type').value;
+      const rating = document.getElementById('filter-rating').value;
+      const sort = document.getElementById('filter-sort').value;
+
+      const results = TravelBuddyDestinations.filter(q, country, budget, type, rating, sort);
+      TravelBuddyDestinations.renderCards(results, 'destinations-grid-container');
+
+      const countText = document.getElementById('results-count-text');
+      if (countText) {
+        countText.innerText = `Showing ${results.length} Destination${results.length === 1 ? '' : 's'}`;
+      }
+    }
+
+    function setQuickType(type, btn) {
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('filter-type').value = type;
+      applyFilters();
+    }
+  </script>
+</body>
+</html>

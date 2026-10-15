@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Travel Buddy Chat - Travel Buddy</title>
+  <meta name="description" content="Chat with your AI travel buddy in Hindi, Hinglish, or English. Get personalized trip advice, itinerary help, and budget tips.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Navbar -->
+  <nav class="navbar">
+    <div class="container navbar-container">
+      <a href="index.html" class="navbar-brand">
+        <div class="brand-icon">
+          <i class="fas fa-plane"></i>
+        </div>
+        <span>Travel Buddy</span>
+      </a>
+      <div class="navbar-nav"></div>
+      <div class="nav-actions" id="navbar-auth-actions"></div>
+      <button class="hamburger-btn" id="hamburger-toggle" aria-label="Toggle Navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-drawer" id="mobile-nav-drawer">
+    <div id="mobile-auth-actions"></div>
+  </div>
+
+  <!-- Page Header -->
+  <header style="background: linear-gradient(135deg, rgba(2,132,199,0.07), rgba(139,92,246,0.07)); padding: 2.5rem 0 1.75rem; border-bottom: 1px solid var(--border-light);">
+    <div class="container">
+      <div style="display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap;">
+        <div style="width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg,#0284c7,#8b5cf6); display:flex; align-items:center; justify-content:center; color:#fff; font-size:1.5rem; box-shadow: 0 8px 20px rgba(2,132,199,0.3);">
+          <i class="fas fa-robot"></i>
+        </div>
+        <div>
+          <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:0.2rem;">
+            <span class="badge badge-purple"><i class="fas fa-wand-magic-sparkles"></i> AI Powered</span>
+            <span class="lang-badge"><i class="fas fa-language"></i> Hindi + English</span>
+          </div>
+          <h1 style="font-size:1.9rem; margin:0;">Your AI Travel Buddy</h1>
+          <p style="margin:0; font-size:0.92rem; color:var(--text-muted);">Hindi mein poochho, English mein poochho — yaar tumhara hamesha ready hai! 🗺️</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Chat Layout -->
+  <main class="container">
+    <div class="chat-layout">
+
+      <!-- Sidebar: Quick Prompts -->
+      <aside class="chat-sidebar">
+        <div class="chat-sidebar-label"><i class="fas fa-bolt"></i> Quick Prompts</div>
+
+        <button class="chat-quick-prompt" onclick="TBChat.sendQuick(this)">
+          🏔️ Manali trip plan karo 5 din ka, budget ₹20,000
+        </button>
+        <button class="chat-quick-prompt" onclick="TBChat.sendQuick(this)">
+          🏖️ Goa mein kahan jaana chahiye beaches ke liye?
+        </button>
+        <button class="chat-quick-prompt" onclick="TBChat.sendQuick(this)">
+          ✈️ Best time kab hai Ladakh jaane ka?
+        </button>
+        <button class="chat-quick-prompt" onclick="TBChat.sendQuick(this)">
+          💰 Cheap mein travel kaise kare India mein?
+        </button>
+        <button class="chat-quick-prompt" onclick="TBChat.sendQuick(this)">
+          🎒 Solo travel ke liye kya pack karna chahiye?
+        </button>
+        <button class="chat-quick-prompt" onclick="TBChat.sendQuick(this)">
+          🍛 Rajasthan mein khaana kaisa hota hai? Suggest karo
+        </button>
+        <button class="chat-quick-prompt" onclick="TBChat.sendQuick(this)">
+          🚆 Delhi se Mumbai train ya flight — kya better hai?
+        </button>
+        <button class="chat-quick-prompt" onclick="TBChat.sendQuick(this)">
+          👨‍👩‍👧 Family trip plan karo Kerala ke liye 7 days
+        </button>
+
+        <div class="chat-sidebar-label" style="margin-top:0.5rem;"><i class="fas fa-info-circle"></i> About</div>
+        <div style="font-size:0.8rem; color:var(--text-muted); line-height:1.55; padding: 0.5rem 0;">
+          Yeh AI buddy <strong>Hindi, Hinglish aur English</strong> teeno mein baat kar sakta hai. Travel plans, budgets, best places — sab kuch poochho!
+        </div>
+
+        <button class="btn btn-outline btn-sm" style="margin-top:0.25rem;" onclick="TBChat.clearChat()">
+          <i class="fas fa-rotate"></i> New Chat
+        </button>
+      </aside>
+
+      <!-- Main Chat Window -->
+      <div class="chat-window">
+
+        <!-- Chat Topbar -->
+        <div class="chat-topbar">
+          <div class="chat-ai-avatar">
+            <i class="fas fa-robot"></i>
+          </div>
+          <div style="flex:1;">
+            <div style="font-weight:700; font-size:1rem; font-family:'Outfit',sans-serif;">Yatri — AI Travel Buddy</div>
+            <div class="chat-online-dot">Online & Ready</div>
+          </div>
+          <div style="display:flex; gap:0.5rem;">
+            <button class="btn btn-outline btn-sm" onclick="TBChat.clearChat()" title="Clear Chat">
+              <i class="fas fa-trash-can"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Messages Container -->
+        <div class="chat-messages" id="chat-messages">
+          <!-- Welcome message injected by JS -->
+        </div>
+
+        <!-- Input Bar -->
+        <div class="chat-input-bar">
+          <div class="chat-textarea-wrap">
+            <textarea
+              id="chat-input"
+              placeholder="Hindi mein ya English mein likho... (e.g. Manali trip plan karo)"
+              rows="1"
+              maxlength="1000"
+            ></textarea>
+          </div>
+          <button class="chat-send-btn" id="chat-send-btn" onclick="TBChat.sendMessage()" title="Send Message">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+
+        <!-- Character count -->
+        <div style="padding: 0.3rem 1.5rem 0.75rem; font-size:0.75rem; color:var(--text-subtle); display:flex; justify-content:space-between;">
+          <span>Press <kbd style="background:var(--bg-subtle);border:1px solid var(--border-strong);padding:1px 5px;border-radius:4px;font-size:0.7rem;">Enter</kbd> to send, <kbd style="background:var(--bg-subtle);border:1px solid var(--border-strong);padding:1px 5px;border-radius:4px;font-size:0.7rem;">Shift+Enter</kbd> for new line</span>
+          <span id="char-count">0 / 1000</span>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-bottom" style="border:none; padding-top:0;">
+      <div>&copy; 2026 Travel Buddy. All Rights Reserved.</div>
+      <div style="display:flex; gap:1.5rem;">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="plan-trip.html">Plan Trip</a>
+        <a href="destinations.html">Destinations</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/script.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/ai-chat-widget.js"></script>
+  <script src="js/destinations.js"></script>
+  <script>
+  const TBChat = {
+    messages: [],
+    isTyping: false,
+    API_BASE: 'http://localhost:5000',
+
+    // ── Welcome message shown on load ──────────────────────────────────────
+    WELCOME: `Namaste! 🙏 Main hoon **Yatri**, tumhara personal AI travel buddy!
+
+Tum mujhse Hindi mein, Hinglish mein, ya English mein — kisi bhi bhasha mein baat kar sakte ho.
+
+Main tumhari help kar sakta hoon:
+- 🗺️ **Trip planning** — kahan jaana, kab jaana, kaise jaana
+- 💰 **Budget tips** — saste mein kaise ghoomein
+- 🏨 **Hotels & stays** — best options suggest karna
+- 🍽️ **Local food** — kya khana chahiye kahan
+- 🎒 **Packing advice** — kya le jaana hai
+- 📅 **Itinerary** — day by day plan banana
+
+Toh batao... **kahan jaana chahte ho?** ✈️`,
+
+    // ── Smart local fallback responses ──────────────────────────────────────
+    FALLBACK_RULES: [
+      {
+        match: /manali|himachal|himalay/i,
+        reply: `**Manali** ek ekdum zabardast destination hai! 🏔️
+
+**Best Time:** March–June (snow + adventure) aur September–November (clear views).
+
+**5-Day Plan idea:**
+- Day 1: Arrival + Mall Road explore karo
+- Day 2: Solang Valley — paragliding, snow activities (₹500-₹1500)
+- Day 3: Rohtang Pass ya Hampta Pass trek (₹2000-₹3500)
+- Day 4: Old Manali + Vashisht Hot Springs + Cafe hopping
+- Day 5: Departure
+
+**Budget estimate (2 log):**
+- Bus (Delhi-Manali): ₹800-₹1200/person
+- Hotel: ₹800-₹2500/night
+- Food: ₹400-₹700/day/person
+
+Koi specific cheez poochho! 😊`
+      },
+      {
+        match: /goa|beach|samudra/i,
+        reply: `**Goa** — party, beaches, aur chill vibes! 🏖️
+
+**Best Beaches:**
+- 🌅 Palolem — romantic, peaceful, south Goa
+- 🎉 Baga / Calangute — nightlife, water sports, north Goa
+- 🤿 Anjuna — flea market, hippie vibes
+- 🐚 Agonda — serene, less crowded
+
+**Must Do:**
+- Dudhsagar Falls day trip (₹1000-₹1500)
+- Spice plantation tour (₹600-₹800)
+- Sunset cruise (₹500-₹1000)
+- Seafood thali at local shacks (₹200-₹400)
+
+**Budget tip:** November-February mein jaao, shoulder season September-October consider karo kam prices ke liye!`
+      },
+      {
+        match: /ladakh|leh|spiti/i,
+        reply: `**Ladakh** — India ka crown jewel! 👑
+
+**Best Time:** June–September (roads open, weather clear)
+
+**Essential Spots:**
+- 🏔️ Pangong Lake — magical blue water, 4,350m altitude
+- 🕌 Thiksey Monastery — mini Potala Palace
+- 🌄 Khardung La Pass — world's highest motorable road
+- 🚗 Nubra Valley — sand dunes + Bactrian camels!
+
+**Health Tips:**
+- Arrive Leh → 2 days acclimatization zaroor karo
+- Diamox tablet lo doctor ki salah se
+- Alcohol avoid karo pehle 2-3 din
+
+**Budget (7 days, 2 log):**
+- Flight Delhi-Leh: ₹5000-₹12000 per person
+- Hotel: ₹1200-₹3000/night
+- Jeep safaris: ₹4000-₹8000/trip
+
+Aur kuch poochho! 🎒`
+      },
+      {
+        match: /budget|cheap|sasta|kam paise|affordable|economic/i,
+        reply: `**Budget Travel India — Pro Tips!** 💰
+
+**Transport Save karo:**
+- 🚌 State buses — flights se 80% saste
+- 🚂 Sleeper/3AC train — comfortable + cheap
+- 🎫 Tatkal quota + IRCTC app — last minute deals
+
+**Accommodation:**
+- Hostels (₹300-₹700/night dorm)
+- OYO budget rooms (₹600-₹1200)
+- Dharamshalas near temples — almost free
+
+**Food:**
+- Dhabas aur local thali — ₹80-₹150/meal
+- Street food = culture + savings!
+- Avoid tourist restaurants near monuments
+
+**Best Budget Destinations:**
+- Rishikesh, Varanasi, Hampi, Pushkar, McLeod Ganj
+
+Kaunsa destination dhundh rahe ho specifically? Main better estimate dunga!`
+      },
+      {
+        match: /solo|akela|alone/i,
+        reply: `**Solo Travel India Guide** 🎒
+
+**Safety Tips:**
+- 📍 Location share karo family ke saath
+- 📵 Local SIM zaroor lo
+- 🏨 Reviews dekh ke hotel book karo
+- 🌙 Night travel se avoid karo unfamiliar areas mein
+
+**Best Solo Destinations:**
+- 🧘 Rishikesh — yoga, rafting, amazing vibe
+- 🏝️ Goa — easy social scene, meet fellow travelers
+- 🏔️ McLeod Ganj — backpacker paradise
+- 🌅 Hampi — historical, peaceful, cheap
+
+**Solo Budget Estimate:**
+- ₹800-₹1500/day hostels mein
+- ₹1500-₹2500/day mid-range mein
+
+**Best Apps:**
+- Hostelworld — hostel booking
+- iGoUGo — connect travelers
+- Couchsurfing — free stays + local tips
+
+Aur kuch poochho, yaar! 🤜`
+      },
+      {
+        match: /pack|luggage|bag|kya le|kya lena/i,
+        reply: `**Packing Essentials — Smart Traveler Style!** 🎒
+
+**Kapde (Clothes):**
+- 3-4 lightweight, quick-dry tops
+- 1-2 warm layers (hills ke liye fleece)
+- Comfortable walking shoes + sandals
+- Rain jacket if monsoon season
+
+**Documents:**
+- Aadhar/Passport — photos bhi phone mein rakho
+- Travel insurance — highly recommended
+- Hotel confirmations PDF mein download karo
+
+**Health Kit:**
+- Basic medicines: Paracetamol, ORS, antacid
+- Electrolytes + water purification tablets
+- Sunscreen SPF 50+ (mountain sun burns fast!)
+- Hand sanitizer
+
+**Gadgets:**
+- Power bank (20,000 mAh minimum)
+- Universal adapter
+- Headphone + eye mask for train travel
+
+**Golden Rule:** Jo pehna ho use nikalo bag se — phir bhi zaroori lagta hai woh mat lo! 😄`
+      },
+      {
+        match: /kerala|backwater|munnar|alleppey/i,
+        reply: `**Kerala — God's Own Country!** 🌴
+
+**Must Visit:**
+- 🛶 Alleppey Backwaters — houseboat stay (₹5000-₹15000/night)
+- ☕ Munnar Tea Estates — scenic drives, cool weather
+- 🐘 Periyar Wildlife Sanctuary — jeep safari
+- 🏖️ Varkala Beach — cliffs + coconut water vibes
+- 🕌 Fort Kochi — European history in India
+
+**7-Day Itinerary (Family):**
+- Day 1-2: Fort Kochi + Mattancherry
+- Day 3: Munnar drive, tea garden walk
+- Day 4-5: Thekkady/Periyar
+- Day 6: Alleppey houseboat
+- Day 7: Varkala beach + departure
+
+**Budget (4 log, 7 days):** ₹60,000-₹1,00,000
+Kerala expensive hai par value for money ekdum sahi!`
+      },
+      {
+        match: /rajasthan|jaipur|jodhpur|jaisalmer|udaipur/i,
+        reply: `**Rajasthan — Royal Land!** 👑
+
+**Golden Triangle + More:**
+- 🏰 Jaipur: Amber Fort, Hawa Mahal, City Palace
+- 🔵 Jodhpur: Mehrangarh Fort, Blue City vibes
+- 🌅 Jaisalmer: Desert, camel safari, sand dunes
+- 💙 Udaipur: Lake Pichola, romantic sunsets
+- 🕌 Pushkar: Holy lake, Brahma temple, camel fair
+
+**Food to Try:**
+- Dal Baati Churma (must have!)
+- Laal Maas (spicy lamb curry)
+- Gatte ki Sabzi
+- Mawa Kachori — meetha snack
+- Lassi — thick Rajasthani style
+
+**Best Time:** October–March (winter = perfect)
+**Avoid:** May-June (50°C+ heat!)
+
+Kitne din ka trip plan hai? Main full itinerary bana sakta hoon!`
+      }
+    ],
+
+    DEFAULT_REPLIES: [
+      `Arre yaar, interesting sawal hai! 🤔
+
+Seedha answer dena mushkil hai bina aur detail ke. Thoda batao:
+- **Kahan jaana chahte ho?** (city/state)
+- **Kitne din ka trip?**
+- **Kitna budget hai?** (rough idea bhi chalega)
+- **Akele ho ya family/friends ke saath?**
+
+Yeh batao, main ekdum tailor-made plan bana dunga tumhare liye! ✈️`,
+
+      `Zabardast sawal! Main samajh raha hoon. 😊
+
+Yeh cheez thodi complex hai, toh seedha poochh lo:
+- Destination naam clearly batao
+- Season ya month batao
+- Budget roughly kitna hai?
+
+Main dono bhasha mein help karunga — Hindi ya English jisme comfortable ho!`,
+
+      `Acha acha! Yeh sun ke achha laga. 🌟
+
+Travel planning mein main expert hoon. Lekin aur specific batao:
+- Trip kab ka plan hai?
+- Kahan se start karoge?
+- Kya dekhna chahte ho mostly — nature, adventure, history, food?
+
+Sab jawab do, main ek solid plan banata hoon! 💪`
+    ],
+
+    // ── Init ───────────────────────────────────────────────────────────────
+    init() {
+      this.renderWelcome();
+      this.bindInput();
+    },
+
+    renderWelcome() {
+      const container = document.getElementById('chat-messages');
+      if (!container) return;
+      container.innerHTML = '';
+      this.appendMessage('ai', this.WELCOME);
+    },
+
+    bindInput() {
+      const input = document.getElementById('chat-input');
+      const counter = document.getElementById('char-count');
+      if (!input) return;
+
+      // Auto-resize textarea
+      input.addEventListener('input', () => {
+        input.style.height = 'auto';
+        input.style.height = Math.min(input.scrollHeight, 120) + 'px';
+        if (counter) counter.textContent = `${input.value.length} / 1000`;
+      });
+
+      // Enter = send, Shift+Enter = newline
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          this.sendMessage();
+        }
+      });
+    },
+
+    sendMessage() {
+      const input = document.getElementById('chat-input');
+      const text = input?.value?.trim();
+      if (!text || this.isTyping) return;
+
+      // Add user message
+      this.appendMessage('user', text);
+      input.value = '';
+      input.style.height = 'auto';
+      const counter = document.getElementById('char-count');
+      if (counter) counter.textContent = '0 / 1000';
+
+      // Show typing indicator
+      this.showTyping();
+
+      // Try backend first, fall back to local
+      this.getAIResponse(text).then(reply => {
+        this.hideTyping();
+        this.appendMessage('ai', reply);
+      });
+    },
+
+    sendQuick(btn) {
+      const text = btn.textContent.trim();
+      const input = document.getElementById('chat-input');
+      if (input) {
+        input.value = text;
+        input.dispatchEvent(new Event('input'));
+      }
+      this.sendMessage();
+    },
+
+    async getAIResponse(userMessage) {
+      // Try backend Gemini API
+      try {
+        const token = localStorage.getItem('tb_jwt_token');
+        if (token) {
+          const currentTrip = (() => {
+            try {
+              const it = JSON.parse(localStorage.getItem('tb_active_itinerary') || 'null');
+              return it ? it.destinationName : null;
+            } catch(e) { return null; }
+          })();
+
+          const user = (() => {
+            try { return JSON.parse(localStorage.getItem('tb_currentUser') || 'null'); } catch(e) { return null; }
+          })();
+
+          const res = await fetch(`${this.API_BASE}/api/ai/chat`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+              message: userMessage,
+              currentTrip,
+              userName: user?.name
+            })
+          });
+
+          if (res.ok) {
+            const data = await res.json();
+            if (data.success && data.reply) {
+              return data.reply;
+            }
+          }
+        }
+      } catch(e) { /* Fall through to local */ }
+
+      // Local smart fallback
+      return this.localFallback(userMessage);
+    },
+
+    localFallback(msg) {
+      // Check rules
+      for (const rule of this.FALLBACK_RULES) {
+        if (rule.match.test(msg)) {
+          return rule.reply;
+        }
+      }
+      // Random default
+      return this.DEFAULT_REPLIES[Math.floor(Math.random() * this.DEFAULT_REPLIES.length)];
+    },
+
+    appendMessage(role, text) {
+      const container = document.getElementById('chat-messages');
+      if (!container) return;
+
+      const isUser = role === 'user';
+      const avatarIcon = isUser ? 'fa-user' : 'fa-robot';
+      const html = this.markdownToHtml(text);
+
+      const msgEl = document.createElement('div');
+      msgEl.className = `chat-msg ${isUser ? 'user' : ''}`;
+      msgEl.innerHTML = `
+        <div class="msg-avatar">
+          <i class="fas ${avatarIcon}"></i>
+        </div>
+        <div class="chat-bubble">${html}</div>
+      `;
+      container.appendChild(msgEl);
+      container.scrollTop = container.scrollHeight;
+
+      this.messages.push({ role, text });
+    },
+
+    showTyping() {
+      this.isTyping = true;
+      const container = document.getElementById('chat-messages');
+      if (!container) return;
+
+      const typingEl = document.createElement('div');
+      typingEl.id = 'typing-indicator';
+      typingEl.className = 'chat-typing-row';
+      typingEl.innerHTML = `
+        <div class="msg-avatar"><i class="fas fa-robot"></i></div>
+        <div class="typing-bubble">
+          <span></span><span></span><span></span>
+        </div>
+      `;
+      container.appendChild(typingEl);
+      container.scrollTop = container.scrollHeight;
+
+      const btn = document.getElementById('chat-send-btn');
+      if (btn) btn.disabled = true;
+    },
+
+    hideTyping() {
+      this.isTyping = false;
+      const el = document.getElementById('typing-indicator');
+      if (el) el.remove();
+      const btn = document.getElementById('chat-send-btn');
+      if (btn) btn.disabled = false;
+    },
+
+    clearChat() {
+      this.messages = [];
+      this.renderWelcome();
+    },
+
+    // Simple markdown → HTML (bold, bullet, line breaks)
+    markdownToHtml(text) {
+      return text
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/^- (.+)$/gm, '<li style="margin-left:1rem;margin-bottom:0.2rem;">$1</li>')
+        .replace(/(<li[^>]*>.*<\/li>\n?)+/g, '<ul style="margin:0.4rem 0;">$&</ul>')
+        .replace(/\n\n/g, '</p><p>')
+        .replace(/\n/g, '<br>')
+        .replace(/^(.+)$/, '<p>$1</p>');
+    }
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    TBChat.init();
+  });
+  </script>
+</body>
+</html>
